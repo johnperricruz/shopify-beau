@@ -1,0 +1,136 @@
+<section class="homepage-slider  position-relative">
+  <div class="slider-container">
+  	<img src="//cdn.shopify.com/s/files/1/0067/4001/7211/files/cta.jpg?9293116178843597835" />
+  </div>
+</section>
+
+{% assign menu = linklists.main-menu %}
+{% assign depth = menu.levels %}
+
+<nav class="mb-5 navbar navbar-expand-lg navbar-light bg-light p-4">
+  <div class="collapse navbar-collapse" id="main-menu">
+    
+   <ul class="navbar-nav mx-auto">
+    {% for link in linklists.main-menu.links %}
+      {% if linklists[link.handle] == empty %}
+      <li id="main-menu-title-{{ link.title }}" class="nav-item">
+        <a class="nav-link" href="{{ link.url }}" class="{% if link.active %} current{% endif %}">
+          <span>{{ link.title }}</span></a>
+      </li>
+      {% else %}
+       <li class="nav-item dropdown">
+         <a  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdown" class="{% if link.active %} current{% endif %} nav-link dropdown-toggle"  href="{{ link.url }}"><span>{{ link.title }}</span></a>
+     	   <div class="dropdown-menu" aria-labelledby="dropdown">
+              {% for l in linklists[link.handle].links %}
+             	 <a class="dropdown-item" href="{{ l.url }}"{% if l.active %} class="current"{% endif %}>{{ l.title }}</a>
+              {% endfor %}
+           </div>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+    
+  </div>
+</nav>
+
+<section class="product-catch-phrase my-5">
+  <div class="container">
+   	 <div class="row">
+       <div class="col-md-12">
+          <h3 class="text-center font-weight-light mb-0">THE ANTI-AGING SERUM FORMULATED WITH</h3>
+          <h3 class="text-center font-weight-bold mb-0">12 POWERFUL PRODUCTS IN ONE BOTTLE.</h3>
+          <h3 class="text-center font-style-italic font-weight-bold mb-5"><em>Created And Tested By Physicians</em></h3>
+  		</div>
+        {% assign prod = all_products['test-product'] %}
+        <div class="col-md-6 text-right">
+			<img src="{{ prod |  img_url: '1024x' }}" alt="{{prod.title}}" title="{{prod.title}}" />
+  		</div>
+        <div class="col-md-6 text-left">
+          <h2>{{prod.title}}</h2>
+          <p>{{prod.description}}</p>
+          <h3>{{prod.price | money_with_currency }}</h3>
+ 			<form class="product-form" action="/cart/add" data-productid="{{prod.id}}"  method="post"> 
+               {% if product.available %}{% include 'subscription-product' %}{% endif %} 
+
+                    {% if prod.variants.size > 1 %}
+                      <div class="product-options">
+                        <select name="id" data-productid="{{prod.id}}" id="product-select" class="product-select">
+                          {% for variant in product.variants %}
+                            <option {% if variant == selectedVariant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    {% else %}
+                      <input type="hidden" name="id" data-productid="{{prod.id}}" class="product-select" value="{{ prod.variants[0].id }}" data-variant-title="{{ prod.variants[0].title }}" />
+                    {% endif %}
+
+                    <div class="input-wrapper product-quantity">
+                      <label for="quantity">{{ 'products.general.quantity' | t }}</label>
+                      <input class="text-center p-1 mr-3" style="max-width:50px;" type="number" name="quantity" min="1" id="quantity" value="1" />
+                    </div>
+
+                    <div class="add-to-cart">
+                      {% if prod.available %}
+                        <div class="product-form-submit-wrap">
+                          <input class="btn btn-success" type="submit" value="{{ 'products.product.add_to_cart' | t }}" />
+                          <div class="add-to-cart-loader"></div>
+                        </div>
+                        {% capture cart_link %}
+                          <a href="/cart">{{ 'products.product.cart_link' | t }}</a>
+                        {% endcapture %}
+                        {% capture continue_link %}
+                          <a href="/collections/all">{{ 'products.product.continue_link' | t }}</a>
+                        {% endcapture %}
+                        {% capture checkout_link %}
+                          <a href="/checkout">{{ 'products.product.checkout_link' | t }}</a>
+                        {% endcapture %}
+                        {% capture product_item %}
+                          <span class='added-product-name'></span>
+                        {% endcapture %}
+                      {% else %}
+                        <input type="button" class="disabled" disabled="disabled" value="{{ 'products.product.sold_out' | t }}" />
+                      {% endif %}
+                    </div>
+              </form>     
+  		</div>       
+      </div>
+   </div>
+</section>
+ 
+
+<section class="as-seen my-5">
+  	<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="text-center font-weight-light">AS SEEN ON :</h4>
+          <p class="text-center"><img src="https://content.screencast.com/users/john.perri/folders/Jing/media/dc046448-84fc-4e8e-b9c8-daa6d1b78701/2018-07-10_1615.png" alt="placeholder only" ></p>
+         </div> 
+       </div> 
+     </div> 
+</section>
+
+<section class="top-help-overlay"></section>
+<section class="footer-cta">
+  	<div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="font-weight-light">Everytime you buy OUR Skin Cares,you're helping a child in need.</h2>
+          <p class="mb-4">With every bottle of OUR Skin Cares purchased, you'll be feeding two children for a month.</p>
+          <a href="#" class="btn btn-white">Learn more</a>
+         </div> 
+       </div> 
+     </div> 
+</section>
+<section class="bottom-help-overlay"></section>
+
+<section class="footer-catchphrase pb-0 pt-5 px-5">
+  	<div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h4 class="font-weight-light">THERE ARE MANY SKINCARE PRODUCTS OUT THERE</h4>
+          <h2>OUR Skin Cares is the only one that<br/>makes me every kind of beautiful.</h2>
+        	<img draggable="false" class="reveal-model" src="https://cdn.shopify.com/s/files/1/0067/4001/7211/files/model.png?12905788196108668401" alt="Our Skin Cares Model" title="Our Skin Cares Model">
+         </div> 
+       </div> 
+     </div> 
+</section>

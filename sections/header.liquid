@@ -1,0 +1,68 @@
+<div class="topmost p-2">
+	<div class="container">
+		<div class="row">
+			<div class="text-left col-md-6">
+				<a href="/">SOME TEXT/LOGO HERE</a>
+			</div>
+			<div class="text-right col-md-6">
+              <span>
+                  {% if customer %}
+               		 Hello, {{ customer.first_name }}!
+                  {% else %}
+                	{{ '<i class="fa fa-user" aria-hidden="true"></i> Register' | customer_register_link }}
+                 {% endif %}
+              </span>
+              <span class="sep">|</span>
+                <span>
+                  <a href="#">
+                      {% if customer %}
+                  		  {{ '<i class="fa fa-unlock" aria-hidden="true"></i> Log out' | customer_logout_link }}
+                   	 {% else %}
+                    	{{ '<i class="fa fa-lock" aria-hidden="true"></i> Log in' | customer_login_link }}
+                  	 {% endif %}
+                  </a>
+                </span>
+              <span class="sep">|</span>
+              <span><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></span>
+			</div>
+		</div>
+	</div>
+</div>
+{% if template  != 'index' %}
+  <div class="navbar-innerpage">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+              <a class="navbar-brand" href="/">LOGO HERE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+                      <div class="collapse navbar-collapse" id="main-menu">
+                         <ul class="navbar-nav">
+                            {% for link in linklists.innerpage-menu.links %}
+                              {% if linklists[link.handle] == empty %}
+                              <li id="main-menu-title-{{ link.title }}" class="nav-item">
+                                <a class="nav-link" href="{{ link.url }}" class="{% if link.active %} current{% endif %}">
+                                  <span>{{ link.title }}</span></a>
+                              </li>
+                              {% else %}
+                               <li class="nav-item dropdown">
+                                 <a  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdown" class="{% if link.active %} current{% endif %} nav-link dropdown-toggle"  href="{{ link.url }}"><span>{{ link.title }}</span></a>
+                                   <div class="dropdown-menu" aria-labelledby="dropdown">
+                                      {% for l in linklists[link.handle].links %}
+                                         <a class="dropdown-item" href="{{ l.url }}"{% if l.active %} class="current"{% endif %}>{{ l.title }}</a>
+                                      {% endfor %}
+                                   </div>
+                                </li>
+                              {% endif %}
+                            {% endfor %}
+                           </ul>
+                          </div>
+     	    	   </nav>
+        		  </div>
+             </div>
+          </div>
+ 	 </div>
+
+{% endif %}

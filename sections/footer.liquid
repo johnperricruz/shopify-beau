@@ -1,0 +1,46 @@
+
+<footer class="p-5">
+	<div clas="container">
+    	<div class="row">
+          	<div class="col-md-12">
+				 <h3>SIGN UP NOW FOR OUR NEWSLETTER TO RECEIVE <br/> AN EXCLUSIVE COUPON DIRECTLY TO YOUR INBOX!</h3>     
+             	 <p class="text-center text-white">--NEWSLETTER HERE--</p>
+              	 <ul class="social-media">
+					{% if settings.social_facebook_link != blank %}
+					  <li>
+						<a class="social-icons__link" href="{{ settings.social_facebook_link | escape }}" aria-describedby="a11y-external-message">
+						  {% include 'icon-facebook' %}
+						  <span class="icon__fallback-text">Facebook</span>
+						</a>
+					  </li>
+					{% endif %}
+					{% if settings.social_twitter_link != blank %}
+					  <li>
+						<a class="social-icons__link" href="{{ settings.social_twitter_link | escape }}" aria-describedby="a11y-external-message">
+						  {% include 'icon-twitter' %}
+						  <span class="icon__fallback-text">Twitter</span>
+						</a>
+					  </li>
+					{% endif %}
+					{% if settings.social_instagram_link != blank %}
+					  <li>
+						<a class="social-icons__link" href="{{ settings.social_instagram_link | escape }}" aria-describedby="a11y-external-message">
+						  {% include 'icon-instagram' %}
+						  <span class="icon__fallback-text">Instagram</span>
+						</a>
+					  </li>
+					{% endif %}
+					{% if settings.social_pinterest_link != blank %}
+					  <li>
+						<a class="social-icons__link" href="{{ settings.social_pinterest_link | escape }}" aria-describedby="a11y-external-message">
+						  {% include 'icon-pinterest' %}
+						  <span class="icon__fallback-text">Pinterest</span>
+						</a>
+					  </li>
+					{% endif %}					
+              	 </ul>
+             	 <h4 class="font-weight-normal mt-5 text-center text-white">--SOME TEXT/LOGO HERE--</h4>
+        	</div>
+    	</div>
+ 	 </div>
+</footer>
