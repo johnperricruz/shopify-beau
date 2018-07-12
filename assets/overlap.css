@@ -287,3 +287,6 @@ header.collection-header h1 {
     max-width: 1180px;
     margin: 0 auto;
 }
+.page-width.default {
+    margin: 50px auto;
+}
