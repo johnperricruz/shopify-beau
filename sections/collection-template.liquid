@@ -35,9 +35,11 @@
       <div class="filters-toolbar-wrapper">
         <div class="page-width">
           <div class="filters-toolbar">
+            <!--
             {% if section.settings.tags_enable %}
               <div class="filters-toolbar__item">
                 <label for="SortTags" class="label--hidden">{{ 'collections.filters.title_tags' | t }}</label>
+                
                 <select class="filters-toolbar__input hidden" name="SortTags" id="SortTags">
                   {% if current_tags %}
                     {% if collection.handle %}
@@ -58,9 +60,11 @@
                     <option value="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}"{% if current_tags contains tag %} selected="selected"{% endif %}>{{ tag }}</option>
                   {% endfor %}
                 </select>
+                
                 {% include 'icon-chevron-down' %}
               </div>
             {% endif %}
+			-->
 
             <div class="filters-toolbar__item filters-toolbar__item--count">
               <span class="filters-toolbar__product-count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</span>
@@ -113,14 +117,36 @@
               </div>
             {% endif %}
           </div>
+          
         </div>
       </div>
     {% endif %}
   
   <div class="page-width container" id="Collection">
     <div class="row">
-
-      <div class="col-md-12">
+	  <div class="col-md-3">
+        <ul class="layered-nav">
+          {% for link in linklists.layered-navigation.links %}
+            {% if linklists[link.handle] == empty %}
+            <li>
+              <a href="{{ link.url }}" class="{% if link.active %} current{% endif %}">
+                <span>{{ link.title }}</span></a>
+            </li>
+            {% else %}
+            <li>
+              <a class="{% if link.active %} current{% endif %}"  href="{{ link.url }}"><span>{{ link.title }}</span></a>
+              <div>
+                {% for l in linklists[link.handle].links %}
+               
+               	 <a {% if l.active %} class="current" {% endif %} href="{{ l.url }}" >{{ l.title }}</a>
+                {% endfor %}
+              </div>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>       
+      </div>
+      <div class="col-md-9">
           {% if section.settings.layout == 'grid' %}
             {% case section.settings.grid %}
             {% when 2 %}

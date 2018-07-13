@@ -113,7 +113,10 @@
       <div class="product-single__meta">
 
         <h1 class="product-single__title">{{ product.title }}</h1>
-
+        <div class="my-2">
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          <span><a id="review" style="font-size:14px;" href="#nav-review"><em>Write a review</em></a></span>
+        </div>
           <div class="product__price">
             {% include 'product-price', variant: current_variant %}
           </div>
@@ -333,9 +336,9 @@
     <div class="col-md-12">
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-shipping" role="tab" aria-controls="nav-profile" aria-selected="false">Shipping</a>
-          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-contact" aria-selected="false">Review</a>
+          <a class="nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
+          <a class="nav-item nav-link" id="nav-shipping-tab" data-toggle="tab" href="#nav-shipping" role="tab" aria-controls="nav-profile" aria-selected="false">Shipping</a>
+          <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-contact" aria-selected="false">Review</a>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
